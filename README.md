@@ -1,0 +1,2 @@
+# majaho
+Make JavaScript HomoIconic

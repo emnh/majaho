@@ -4,6 +4,8 @@ Make JavaScript HomoIconic
 
 Not to be confused with song lyrics majahi, majaho. Although the pun is intended.
 
+Similar in spirit to https://github.com/anko/eslisp .
+
 # Introduction
 
 My foray into lisp territory consists of Clojure and ClojureScript. It was a nice experience, but in the end I didn't succeed in convincing myself that it was the end of my journey because I still couldn't hold my project inside my mind and it felt like I needed to spend more effort translating than just copy-pasting JavaScript. I decided maybe a statically typed language would improve the situation so I tried ReasonML. It was a nice experience as well, but also felt like a lot of mental effort to understand and work on my old code later, plus lots of effort in writing statically typed wrappers around JavaScript. I also wasn't satisfied with the state of macros in ReasonML. They are not native enough, requiring external PPX.

@@ -24,11 +24,11 @@ I have higher ambitions that both homoiconicity and inferred static typing as we
 
 # Implementation
 
-for each node in AST
-    - output (node.type (node.property0 node.property0value) ... (node.propertyN node.propertyNvalue))
-    - shorten it to (node.type node.property0value ... node.propertyNvalue) where the properties are implied by node.type
-    - let nodeAlias = shortAlias(node.type) and shorten it to (nodeAlias node.property0Value ... node.propertyNvalue)
-    - exclude node.type when implied by operator: (binop operator ...) -> (operator ...)
+for each node in AST:
+ - output (node.type (node.property0 node.property0value) ... (node.propertyN node.propertyNvalue))
+ - shorten it to (node.type node.property0value ... node.propertyNvalue) where the properties are implied by node.type
+ - let nodeAlias = shortAlias(node.type) and shorten it to (nodeAlias node.property0Value ... node.propertyNvalue)
+ - exclude node.type when implied by operator: (binop operator ...) -> (operator ...)
 
 For example:
     - 1 + 2 -> (BinaryExpression (operator +) (left (literal 1)) (right (literal 2))) -> (binop + 1 2) -> (+ 1 2)

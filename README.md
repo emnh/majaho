@@ -21,3 +21,20 @@ But still, I think lisp is the father or mother of all macro processing. Althoug
 How to integrate static typing remains an issue though. I haven't seen a good lispy syntax for static typing. But perhaps considering a value propagation syntax will work. Such as (var a (int 0)). On the other hand, everything should be inferred. Maybe just make inference a hard requirement, not allowing to override the types? That might require some usage hacks though: fake usage of variables to infer their types. I think I am gonna go with making 100% code coverage with tests a requirement, and decide that you have to run the code at least once to infer the "static" types, which will be tracked in auxiliary or external data files. It's the only way to deal with the full power of a dynamic language anyway. 100% code coverage will also allow hard tree shaking, or full dead code elimination. If tests do not cover your code, it will be eliminated from the final product. Sounds harsh, but I think I can live with it. At least at the function or class level (exceptions may be hard to cover). Let's see. Uncovered code could be lazily loaded, but how do you interrupt a running synchronous function in JavaScript to wait asynchronously for code to arrive from the server? There's no sleep, so I don't think that's possible. So maybe require idempotency and code retry / reload or alternatively full page reload without expected "dead" code eliminated.
 
 I have higher ambitions that both homoiconicity and inferred static typing as well. I want live coding to be native to the language, with partial code updates and so on. More on that later. Let's build it step by step.
+
+# Implementation
+
+for each node in AST
+    - output (node.type (node.property0 node.property0value) ... (node.propertyN node.propertyNvalue))
+    - shorten it to (node.type node.property0value ... node.propertyNvalue) where the properties are implied by node.type
+    - let nodeAlias = shortAlias(node.type) and shorten it to (nodeAlias node.property0Value ... node.propertyNvalue)
+    - exclude node.type when implied by operator: (binop operator ...) -> (operator ...)
+
+For example:
+    - 1 + 2 -> (BinaryExpression (operator +) (left (literal 1)) (right (literal 2))) -> (binop + 1 2) -> (+ 1 2)
+
+# Value tracking
+
+Value lifting:
+ - for each expression node in AST wrap expression node in lift function
+ - for each unwrapped / foreign function call or evaluation in AST wrap function in unlift function

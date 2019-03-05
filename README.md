@@ -31,7 +31,7 @@ for each node in AST:
  - exclude node.type when implied by operator: (binop operator ...) -> (operator ...)
 
 For example:
-    - 1 + 2 -> (BinaryExpression (operator +) (left (literal 1)) (right (literal 2))) -> (binop + 1 2) -> (+ 1 2)
+ - 1 + 2 -> (BinaryExpression (operator +) (left (literal 1)) (right (literal 2))) -> (binop + 1 2) -> (+ 1 2)
 
 # Value tracking
 

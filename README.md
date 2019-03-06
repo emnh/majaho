@@ -138,3 +138,4 @@ Value lifting:
   - http://lisperator.net/pltut/compiler/cps-transformer
   - https://astexplorer.net/
   - http://www.graspjs.com/
+  - https://en.wikipedia.org/wiki/Tree_traversal

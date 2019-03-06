@@ -1,0 +1,11 @@
+JSXAttribute
+JSXClosingElement
+JSXElement
+JSXEmptyExpression
+JSXExpressionContainer
+JSXIdentifier
+JSXMemberExpression
+JSXNamespacedName
+JSXOpeningElement
+JSXSpreadAttribute
+JSXText

@@ -132,3 +132,9 @@ majaho.JSForm;
 Value lifting:
  - for each expression node in AST wrap expression node in lift function
  - for each unwrapped / foreign function call or evaluation in AST wrap function in unlift function
+
+
+ # Resources
+  - http://lisperator.net/pltut/compiler/cps-transformer
+  - https://astexplorer.net/
+  - http://www.graspjs.com/

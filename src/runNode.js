@@ -12,8 +12,9 @@ const ast = majaho.parse(source, {});
 const walker = new majaho.TreeWalker(ast, majaho.Order.BFS);
 for (const accessor of walker) {
     const node = walker.getNode(accessor);
-    console.log("node", node.type, node);
+    // console.log("node", node.type, node);
 }
 
 const lisp = majaho.toLisp(ast);
 console.log("lisp", lisp);
+

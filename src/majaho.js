@@ -2,6 +2,8 @@
 
 const cherow = require('cherow');
 const Deque = require('@blakeembrey/deque').Deque;
+const orderedES6 = require('./orderedES6');
+const es6order = orderedES6.resolveClasses();
 
 let c = 0;
 
@@ -13,6 +15,10 @@ const Order = ex.Order = {
     DFSPostOrder: c++,
     DFSBoth: c++
 };
+
+function logWarning(msg) {
+    console.log(msg);
+}
 
 // const Form = ex.Form = {
 //     ESTree: c++,
@@ -100,7 +106,26 @@ ex.TreeWalker.prototype[Symbol.iterator] = function*() {
         }
 
         if (top.order !== Order.DFSPostOrder) {
+            
+            const orderedProps = es6order[top.node.type];
+            
+            const allProps = [];
             for (const child in top.node) {
+                if (['type', 'start', 'end'].indexOf(child) >= 0) {
+                    // console.log("continuing with " + child);
+                    continue;
+                }
+                if (orderedProps.indexOf(child) < 0) {
+                    logWarning(
+                        'unexpected property on ' + top.node.type + ': ' + child
+                        + ', expected one of: ' + orderedProps);
+                }
+                allProps.push(child);
+            }
+
+            console.log("CHILDREN " + top.node.type + ": " + orderedProps + " vs " + allProps);
+
+            for (const child of orderedProps) {
                 // console.log(child, top.node[child]);
                 if (isNode(top.node[child])) {
                     const newNode = newAccessor(top.nodeID, child, null, top.node[child], nodeID++, nodeOrder);
@@ -199,7 +224,13 @@ ex.toLisp = function(ast) {
         const node = walker.getNode(accessor);
         const order = walker.getOrder(accessor);
         if (order === Order.DFSPreOrder) {
-            tokens.push("(" + node.type);
+            const lastToken = tokens[tokens.length - 1];
+            if (lastToken == ')') {
+                tokens.push(" ");
+            }
+            tokens.push("(");
+            tokens.push(node.type);
+            tokens.push(" ");
             // tokens.push(node.type);
             if (node.type === 'Literal') {
                 tokens.push(node.value);
@@ -213,7 +244,7 @@ ex.toLisp = function(ast) {
         }
     }
 
-    return tokens.join(' ');
+    return tokens.join('');
 }
 
 // majaho.getPath(accessor);

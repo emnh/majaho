@@ -134,7 +134,11 @@ Value lifting:
  - for each unwrapped / foreign function call or evaluation in AST wrap function in unlift function
 
 
- # Resources
+# Description of files
+
+ - src/data/es6.json: From https://github.com/estree/formal/tree/master/formal-data
+
+# Resources
   - http://lisperator.net/pltut/compiler/cps-transformer
   - https://astexplorer.net/
   - http://www.graspjs.com/
